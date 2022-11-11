@@ -1,1 +1,0 @@
-# ogulcan-assignment-10
