@@ -36,28 +36,37 @@ public class Controller {
  	 	 	 	 .build().toUri();
 			
 		
-		 ResponseEntity<WeekResponse> res = restTemplate.getForEntity(uri, WeekResponse.class);
+		 ResponseEntity<WeekResponse> response = restTemplate.getForEntity(uri, WeekResponse.class);
 		 
 		
 		
 		
 		
-		return res;
+		return response;
 	}
 
-	@GetMapping("mealplanner/day")
-	public ResponseEntity<DayResponse> getDayMeals(String numCalories, String diet, String exclusions) {
+	@GetMapping("/mealplanner/day")
+	public ResponseEntity<DayResponse> getDayMeals(@RequestParam("timeFrame") String numCalories, @RequestParam  Integer targetCalories,  @RequestParam String diet,  @RequestParam("exclude")  String exclusions) throws JsonMappingException, JsonProcessingException {
+
+		
+		
 		RestTemplate restTemplate = new RestTemplate();
 		URI uri = UriComponentsBuilder.fromHttpUrl("https://api.spoonacular.com/mealplanner/generate")
- 	 	 	 	 .queryParam("timeFrame","day")
- 	 	 	 	 .queryParam("targetCalories","2000")
- 	 	 	 	 .queryParam("diet", "vegetarian")
- 	 	 	 	 .queryParam("exclusions", "olives")
+				
+ 	 	 	 	 .queryParam("timeFrame",numCalories)
+ 	 	 	 	 .queryParam("targetCalories",targetCalories)
+ 	 	 	 	 .queryParam("diet", diet)
+ 	 	 	 	 .queryParam("exclude", exclusions)
  	 	 	 	 .queryParam("apiKey","e517a0a00a7a4b0093c05d501d45ee96")
  	 	 	 	 .build().toUri();
-		ResponseEntity<DayResponse> response = restTemplate.getForEntity(uri, DayResponse.class);
+			
+		
+		 ResponseEntity<DayResponse> response = restTemplate.getForEntity(uri, DayResponse.class);
+		 
+		
+		
+		
 		
 		return response;
-
 	}
 }
