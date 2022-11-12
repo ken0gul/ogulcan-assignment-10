@@ -20,15 +20,15 @@ public class Controller {
 	
 	
 	@GetMapping("/mealplanner/week")
-	public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam String numCalories, @RequestParam  Integer targetCalories,  @RequestParam String diet,  @RequestParam  String exclusions) throws JsonMappingException, JsonProcessingException {
+	public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam("targetCalories")  Integer numCalories,  @RequestParam String diet,  @RequestParam("exclude")  String exclusions) throws JsonMappingException, JsonProcessingException {
 
 		
 		
 		RestTemplate restTemplate = new RestTemplate();
 		URI uri = UriComponentsBuilder.fromHttpUrl("https://api.spoonacular.com/mealplanner/generate")
 				
- 	 	 	 	 .queryParam("timeFrame",numCalories)
- 	 	 	 	 .queryParam("targetCalories",targetCalories)
+ 	 	 	 	 .queryParam("timeFrame","week")
+ 	 	 	 	 .queryParam("targetCalories",numCalories)
  	 	 	 	 .queryParam("diet", diet)
  	 	 	 	 .queryParam("exclude", exclusions)
  	 	 	 	 .queryParam("apiKey","e517a0a00a7a4b0093c05d501d45ee96")
@@ -45,15 +45,15 @@ public class Controller {
 	}
 
 	@GetMapping("/mealplanner/day")
-	public ResponseEntity<DayResponse> getDayMeals(@RequestParam("timeFrame") String numCalories, @RequestParam  Integer targetCalories,  @RequestParam String diet,  @RequestParam("exclude")  String exclusions) throws JsonMappingException, JsonProcessingException {
+	public ResponseEntity<DayResponse> getDayMeals(@RequestParam("targetCalories")  Integer numCalories,  @RequestParam String diet,  @RequestParam("exclude")  String exclusions) throws JsonMappingException, JsonProcessingException {
 
 		
 		
 		RestTemplate restTemplate = new RestTemplate();
 		URI uri = UriComponentsBuilder.fromHttpUrl("https://api.spoonacular.com/mealplanner/generate")
 				
- 	 	 	 	 .queryParam("timeFrame",numCalories)
- 	 	 	 	 .queryParam("targetCalories",targetCalories)
+ 	 	 	 	 .queryParam("timeFrame","day")
+ 	 	 	 	 .queryParam("targetCalories",numCalories)
  	 	 	 	 .queryParam("diet", diet)
  	 	 	 	 .queryParam("exclude", exclusions)
  	 	 	 	 .queryParam("apiKey","e517a0a00a7a4b0093c05d501d45ee96")
