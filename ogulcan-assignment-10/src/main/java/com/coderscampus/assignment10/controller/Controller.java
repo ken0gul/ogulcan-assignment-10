@@ -20,7 +20,7 @@ public class Controller {
 	
 	
 	@GetMapping("/mealplanner/week")
-	public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam("timeFrame") String numCalories, @RequestParam  Integer targetCalories,  @RequestParam String diet,  @RequestParam("exclude")  String exclusions) throws JsonMappingException, JsonProcessingException {
+	public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam String numCalories, @RequestParam  Integer targetCalories,  @RequestParam String diet,  @RequestParam  String exclusions) throws JsonMappingException, JsonProcessingException {
 
 		
 		
