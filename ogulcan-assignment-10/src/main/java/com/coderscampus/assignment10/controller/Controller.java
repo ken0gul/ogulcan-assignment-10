@@ -2,6 +2,7 @@ package com.coderscampus.assignment10.controller;
 
 import java.net.URI;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,15 +19,27 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 @RestController
 public class Controller {
 	
+	@Value("${spoonacular.urls.base}")
+	private String baseUrl;
+	
+	
+	@Value("${spoonacular.urls.mealplan}")
+	private String mealPlanUrl;
+	
+	
+	
 	
 	@GetMapping("/mealplanner/week")
+	
 	public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam("targetCalories")  Integer numCalories,  @RequestParam String diet,  @RequestParam("exclude")  String exclusions) throws JsonMappingException, JsonProcessingException {
-
 		
+		//Concatenate two strings to craete a base url for the api
+		String url  =baseUrl+mealPlanUrl;
 		
 		RestTemplate restTemplate = new RestTemplate();
-		URI uri = UriComponentsBuilder.fromHttpUrl("https://api.spoonacular.com/mealplanner/generate")
-				
+		URI uri = UriComponentsBuilder.fromHttpUrl(url)
+				// Set timeFrame as "week" by default
+				// given endpoint expilicitly specifies it
  	 	 	 	 .queryParam("timeFrame","week")
  	 	 	 	 .queryParam("targetCalories",numCalories)
  	 	 	 	 .queryParam("diet", diet)
@@ -48,9 +61,9 @@ public class Controller {
 	public ResponseEntity<DayResponse> getDayMeals(@RequestParam("targetCalories")  Integer numCalories,  @RequestParam String diet,  @RequestParam("exclude")  String exclusions) throws JsonMappingException, JsonProcessingException {
 
 		
-		
+		String url  =baseUrl+mealPlanUrl;
 		RestTemplate restTemplate = new RestTemplate();
-		URI uri = UriComponentsBuilder.fromHttpUrl("https://api.spoonacular.com/mealplanner/generate")
+		URI uri = UriComponentsBuilder.fromHttpUrl(url)
 				
  	 	 	 	 .queryParam("timeFrame","day")
  	 	 	 	 .queryParam("targetCalories",numCalories)
