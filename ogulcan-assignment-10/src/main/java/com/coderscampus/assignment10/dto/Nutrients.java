@@ -4,21 +4,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Nutrients {
 	@JsonProperty("calories")
-    private Integer calories;
+	private Integer calories;
 	@JsonProperty("carbohydrates")
-    private Integer carbohydrates;
+	private Integer carbohydrates;
 	@JsonProperty("fat")
-    private Integer fat;
+	private Integer fat;
 	@JsonProperty("protein")
-    private Integer protein;
+	private Integer protein;
 
+	public Nutrients() {
 
-    
-    public Nutrients() {
-    	
-    }
-
-
+	}
 
 	public Nutrients(Integer calories, Integer carbohydrates, Integer fat, Integer protein) {
 		super();
@@ -28,53 +24,36 @@ public class Nutrients {
 		this.protein = protein;
 	}
 
-
-
 	public Integer getCalories() {
 		return calories;
 	}
-
-
 
 	public void setCalories(Integer calories) {
 		this.calories = calories;
 	}
 
-
-
 	public Integer getCarbohydrates() {
 		return carbohydrates;
 	}
-
-
 
 	public void setCarbohydrates(Integer carbohydrates) {
 		this.carbohydrates = carbohydrates;
 	}
 
-
-
 	public Integer getFat() {
 		return fat;
 	}
-
-
 
 	public void setFat(Integer fat) {
 		this.fat = fat;
 	}
 
-
-
 	public Integer getProtein() {
 		return protein;
 	}
 
-
-
 	public void setProtein(Integer protein) {
 		this.protein = protein;
 	}
-    
-    
+
 }
