@@ -1,6 +1,7 @@
 package com.coderscampus.assignment10.controller;
 
 import java.net.URI;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class Controller {
 	
 	@GetMapping("/mealplanner/week")
 	
-	public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam("targetCalories")  Integer numCalories,  @RequestParam String diet,  @RequestParam("exclude")  String exclusions) throws JsonMappingException, JsonProcessingException {
+	public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam("targetCalories")  Optional<?> numCalories,  @RequestParam Optional<?> diet,  @RequestParam("exclude")  Optional<?> exclusions) throws JsonMappingException, JsonProcessingException {
 		
 		//Concatenate two strings to craete a base url for the api
 		String url  =baseUrl+mealPlanUrl;
@@ -41,24 +42,24 @@ public class Controller {
 				// Set timeFrame as "week" by default
 				// given endpoint expilicitly specifies it
  	 	 	 	 .queryParam("timeFrame","week")
- 	 	 	 	 .queryParam("targetCalories",numCalories)
- 	 	 	 	 .queryParam("diet", diet)
- 	 	 	 	 .queryParam("exclude", exclusions)
+ 	 	 	 	 .queryParamIfPresent("targetCalories", numCalories)
+ 	 	 	 	 .queryParamIfPresent("diet", diet)
+ 	 	 	 	 .queryParamIfPresent("exclude", exclusions)
  	 	 	 	 .queryParam("apiKey","e517a0a00a7a4b0093c05d501d45ee96")
+ 	 	 	 	
+ 	 	 	 	 
  	 	 	 	 .build().toUri();
 			
 		
 		 ResponseEntity<WeekResponse> response = restTemplate.getForEntity(uri, WeekResponse.class);
 		 
-		
-		
-		
+		ResponseEntity.of(Optional.ofNullable(null));
 		
 		return response;
 	}
 
 	@GetMapping("/mealplanner/day")
-	public ResponseEntity<DayResponse> getDayMeals(@RequestParam("targetCalories")  Integer numCalories,  @RequestParam String diet,  @RequestParam("exclude")  String exclusions) throws JsonMappingException, JsonProcessingException {
+	public ResponseEntity<DayResponse> getDayMeals(@RequestParam("targetCalories")  Optional<?> numCalories,  @RequestParam  Optional<?> diet,  @RequestParam("exclude")  Optional<?> exclusions) throws JsonMappingException, JsonProcessingException {
 
 		
 		String url  =baseUrl+mealPlanUrl;
@@ -66,9 +67,9 @@ public class Controller {
 		URI uri = UriComponentsBuilder.fromHttpUrl(url)
 				
  	 	 	 	 .queryParam("timeFrame","day")
- 	 	 	 	 .queryParam("targetCalories",numCalories)
- 	 	 	 	 .queryParam("diet", diet)
- 	 	 	 	 .queryParam("exclude", exclusions)
+ 	 	 	 	 .queryParamIfPresent("targetCalories", numCalories)
+ 	 	 	 	 .queryParamIfPresent("diet", diet)
+ 	 	 	 	 .queryParamIfPresent("exclude", exclusions)
  	 	 	 	 .queryParam("apiKey","e517a0a00a7a4b0093c05d501d45ee96")
  	 	 	 	 .build().toUri();
 			
