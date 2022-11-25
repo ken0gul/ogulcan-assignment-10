@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 
 @RestController
-public class Controller {
+public class MealPlannerController {
 	
 	@Value("${spoonacular.urls.base}")
 	private String baseUrl;
